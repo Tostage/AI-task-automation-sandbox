@@ -3,9 +3,10 @@ from evaluate import evaluate_task
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--task", type=str, required=True, help="Name of task JSON file (no extension)")
+    parser.add_argument("--task", type=str, required=True, help="Task name (no extension)")
+    parser.add_argument("--use_gpt", action="store_true", help="Generate outputs with GPT-4")
+
     args = parser.parse_args()
 
-    file_path = f"tasks/{args.task}.json"
-    evaluate_task(file_path)
-
+    task_file = f"tasks/{args.task}.json"
+    evaluate_task(task_file, args.task, use_gpt=args.use_gpt)
