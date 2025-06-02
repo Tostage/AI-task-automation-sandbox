@@ -1,51 +1,29 @@
 import json
-import os
-from openai import OpenAI
-
-client = OpenAI()  # Uses OPENAI_API_KEY from environment
-
-def get_model_output(task_type, input_text, instruction=None):
-    if task_type == "follow_instructions":
-        prompt = f"Instruction: {instruction}\nInput: {input_text}\nAnswer:"
-    else:
-        prompt = f"Input: {input_text}\nCategory:"
-
-    response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.2
-    )
-
-    return response.choices[0].message.content.strip()
+from scoring_rules import score_output
 
 def evaluate_task(file_path, task_type, use_gpt=False):
     with open(file_path, 'r') as f:
         data = json.load(f)
 
-    correct = 0
+    results = []
+
     for item in data:
-        input_text = item.get("input", "")
         instruction = item.get("instruction", "")
+        input_text = item.get("input", "")
+        expected_points = item["expected_points"]
+        model_output = item["model_output"]
 
-        if use_gpt:
-            output = get_model_output(task_type, input_text, instruction)
-            item["model_output"] = output
-        else:
-            output = item["model_output"]
+        score, label, hits = score_output(expected_points, model_output)
+        item["score"] = score
+        item["evaluator_comment"] = label
 
-        expected = item.get("expected_category") or item.get("expected_priority") or item.get("expected_response")
+        print(f"{label} | Score: {score:.2f}")
+        print(f"Instruction: {instruction}")
+        print(f"Output: {model_output}")
+        print(f"Matched {hits}/{len(expected_points)} key points\n")
 
-        # Simple match logic
-        if isinstance(expected, list):
-            match = all(e.lower() in output.lower() for e in expected)
-        else:
-            match = output.strip().lower() == expected.strip().lower()
+        results.append(item)
 
-        result = "✅" if match else "❌"
-        if match:
-            correct += 1
-
-        print(f"{result} Input: {input_text}")
-        print(f"  Expected: {expected} | Got: {output}\n")
-
-    print(f"\nAccuracy: {correct}/{len(data)} correct ({(correct / len(data)) * 100:.1f}%)")
+    # Optional: write back results
+    with open(file_path.replace(".json", "_scored.json"), "w") as f:
+        json.dump(results, f, indent=2)
