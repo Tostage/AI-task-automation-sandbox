@@ -1,20 +1,29 @@
-# AI-task-automation-sandbox
+# AI Task Evaluation Framework
 
-This project simulates real-world microtasks used in AI operations platforms (e.g., Outlier, Surge, Invisible). It includes logic-based classification, instruction-following tasks and auto-evaluation scripts. Designed to showcase how prompts, outputs and evaluation logic can be combined for consistent automation.
+This project simulates and scores instruction-following and classification tasks using real or simulated LLM responses (e.g. ChatGPT). It is designed to reflect the kind of manual and automated evaluation work required by AI ops platforms such as Outlier, Surge, and Invisible Technologies.
 
-## 🧠 Tasks Simulated
+---
 
-- **Email Classification**: Assign categories like "Support", "Sales" or "Spam" to sample emails.
-- **Ticket Triage**: Prioritize support tickets based on urgency and issue type.
-- **Instruction Following QA**: Judge if answers fully, partially or fail to follow instructions.
+## 🔍 Project Purpose
 
-## 📂 Structure
+To evaluate how accurately LLMs follow instructions, respond to classification prompts, and deliver structured outputs.
 
-- `tasks/`: Contains JSON datasets with prompts, LLM outputs, and target answers.
-- `evaluate.py`: Evaluates outputs based on simple logical rules.
-- `run_task.py`: Loads task files, prints task outputs and runs evaluations.
+Supports:
+- Manual or GPT-generated responses
+- Tiered scoring (Fully correct / Partially correct / Incorrect)
+- Custom scoring logic per task type
+- Evaluation summaries and task-by-task grading
 
-## 🔧 Example Usage
+---
 
-```bash
-python run_task.py --task classify_emails
+## 🧠 Task Types
+
+### 1. Classification (`classify_emails.json`)
+Prompts the LLM to categorize inputs into one of several predefined labels (e.g. "Sales", "Support", "Escalation").
+
+```json
+{
+  "input": "I need help resetting my password.",
+  "expected_category": "Support",
+  "model_output": "Support"
+}
