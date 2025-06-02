@@ -1,22 +1,16 @@
 [
-  {
-    "instruction": "List 3 pros of electric vehicles.",
-    "input": "",
-    "expected_points": [
-      "Lower emissions",
-      "Reduced fuel costs",
-      "Quieter driving experience"
-    ],
-    "model_output": "",
-    "evaluator_comment": "",
-    "score": 0
-  },
-  {
-    "instruction": "Summarize the following sentence in under 10 words.",
-    "input": "The quick brown fox jumps over the lazy dog.",
-    "expected_points": ["fox jumps", "lazy dog", "under 10 words"],
-    "model_output": "",
-    "evaluator_comment": "",
-    "score": 0
-  }
+    {
+        "instruction": "List three reasons why recycling is important.",
+        "expected_response": [
+            "Reduces waste in landfills",
+            "Conserves natural resources",
+            "Saves energy"
+        ],
+        "model_output": "It helps the planet and uses less energy."
+    },
+    {
+        "instruction": "Summarize this sentence in under 10 words.",
+        "expected_response": "A quick fox jumps over a lazy dog.",
+        "model_output": "A quick fox jumps over a lazy dog."
+    }
 ]
