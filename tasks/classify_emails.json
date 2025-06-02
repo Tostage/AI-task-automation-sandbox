@@ -3,5 +3,15 @@
     "input": "Can you tell me more about your pricing plans?",
     "expected_category": "Sales",
     "model_output": "Sales"
+  },
+  {
+    "input": "I need help resetting my password.",
+    "expected_category": "Support",
+    "model_output": "Support"
+  },
+  {
+    "input": "You guys suck. I'm going to sue you.",
+    "expected_category": "Escalation",
+    "model_output": "Support"
   }
 ]
