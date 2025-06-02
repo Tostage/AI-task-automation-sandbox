@@ -1,2 +1,3 @@
-# Only base packages needed
+openai
+
 
