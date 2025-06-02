@@ -1,1 +1,7 @@
-
+[
+  {
+    "input": "Can you tell me more about your pricing plans?",
+    "expected_category": "Sales",
+    "model_output": "Sales"
+  }
+]
