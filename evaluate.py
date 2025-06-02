@@ -11,7 +11,7 @@ def get_model_output(task_type, input_text, instruction=None):
         prompt = f"Input: {input_text}\nCategory:"
 
     response = client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.2
     )
