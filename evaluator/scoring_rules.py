@@ -1,15 +1,16 @@
-def score_output(expected_points, model_output):
-    hits = sum(1 for point in expected_points if point.lower() in model_output.lower())
-    total = len(expected_points)
-    score = hits / total
-
-    if score == 1:
-        label = "✅ Fully correct"
-    elif score >= 0.5:
-        label = "⚠️ Partially correct"
+def grade_instruction_following(expected, output):
+    if isinstance(expected, list):
+        matches = sum(1 for e in expected if e.lower() in output.lower())
+        if matches == len(expected):
+            return "✅ Fully Correct"
+        elif matches > 0:
+            return "⚠️ Partially Correct"
+        else:
+            return "❌ Incorrect"
     else:
-        label = "❌ Incorrect"
-
-    return score, label, hits
-
-
+        if expected.lower().strip() == output.lower().strip():
+            return "✅ Fully Correct"
+        elif expected.lower().strip() in output.lower():
+            return "⚠️ Partially Correct"
+        else:
+            return "❌ Incorrect"
