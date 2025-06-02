@@ -1,29 +1,26 @@
 import json
-from scoring_rules import score_output
+from evaluator.scoring_rules import grade_instruction_following
 
-def evaluate_task(file_path, task_type, use_gpt=False):
+def evaluate_task(file_path, task_type):
     with open(file_path, 'r') as f:
         data = json.load(f)
 
-    results = []
+    summary = {"✅ Fully Correct": 0, "⚠️ Partially Correct": 0, "❌ Incorrect": 0}
 
     for item in data:
-        instruction = item.get("instruction", "")
         input_text = item.get("input", "")
-        expected_points = item["expected_points"]
-        model_output = item["model_output"]
+        instruction = item.get("instruction", "")
+        expected = item.get("expected_response")
+        output = item.get("model_output")
 
-        score, label, hits = score_output(expected_points, model_output)
-        item["score"] = score
-        item["evaluator_comment"] = label
+        grade = grade_instruction_following(expected, output)
+        summary[grade] += 1
 
-        print(f"{label} | Score: {score:.2f}")
-        print(f"Instruction: {instruction}")
-        print(f"Output: {model_output}")
-        print(f"Matched {hits}/{len(expected_points)} key points\n")
+        print(f"{grade} | Instruction: {instruction}")
+        print(f"Expected: {expected}")
+        print(f"Got: {output}\n")
 
-        results.append(item)
-
-    # Optional: write back results
-    with open(file_path.replace(".json", "_scored.json"), "w") as f:
-        json.dump(results, f, indent=2)
+    total = sum(summary.values())
+    print("📊 Summary:")
+    for k, v in summary.items():
+        print(f"{k}: {v} ({(v / total) * 100:.1f}%)")
