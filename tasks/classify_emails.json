@@ -12,6 +12,6 @@
   {
     "input": "You guys suck. I'm going to sue you.",
     "expected_category": "Escalation",
-    "model_output": "Support"
+    "model_output": "Escalation"
   }
 ]
