@@ -1,1 +1,22 @@
+[
+  {
+    "instruction": "Summarize this sentence in under 10 words.",
+    "input": "The quick brown fox jumps over the lazy dog.",
+    "expected_response": "A fox jumps over a lazy dog.",
+    "model_output": "A fox jumps over a dog."
+  },
+  {
+    "instruction": "List three reasons why recycling is important.",
+    "input": "",
+    "expected_response": [
+      "Reduces waste in landfills",
+      "Conserves natural resources",
+      "Saves energy"
+    ],
+    "model_output": [
+      "Reduces landfill waste",
+      "Helps the environment"
+    ]
+  }
+]
 
