@@ -1,1 +1,12 @@
-
+[
+  { "prompt": "Summarize: The quick brown fox jumps over the lazy dog." },
+  { "prompt": "Translate to French: I like programming and pizza." },
+  { "prompt": "What's the capital of Japan?" },
+  { "prompt": "Summarize: In a world ravaged by war, peace was finally achieved through unity." },
+  { "prompt": "Translate to French: She is very intelligent and kind." },
+  { "prompt": "How does photosynthesis work?" },
+  { "prompt": "Summarize: Inflation has decreased steadily over the past 6 months." },
+  { "prompt": "Translate to French: The sun is shining and it's a beautiful day." },
+  { "prompt": "What is the boiling point of water in Celsius?" },
+  { "prompt": "Summarize: Renewable energy sources are key to long-term sustainability." }
+]
