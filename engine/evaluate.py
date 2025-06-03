@@ -24,7 +24,7 @@ Is this response relevant and accurate? Answer with:
 
     # Fallback parser (could vary a bit)
     verdict = "✅" if "✅" in raw else "❌"
-    confidence = next((int(s) for s in raw.split() if s.strip('%').isdigit()), 50)
+    confidence = next((int(s.strip('%')) for s in raw.split() if s.strip('%').isdigit()), 50)
     explanation = raw.strip().split('\n')[-1]
 
     return {
