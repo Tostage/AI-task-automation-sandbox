@@ -1,3 +1,8 @@
+import json  # ← THIS LINE WAS MISSING
+
+from engine.router import route_prompt
+from engine.executor import execute_task
+
 with open("data/tasks.json") as f:
     tasks = json.load(f)
 
